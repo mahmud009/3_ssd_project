@@ -1,0 +1,454 @@
+$h-padding: 80px;
+$v-padding: 60px;
+
+$font-primary: #333333;
+$font-secondary: lighten($font-primary, 30%);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: white;
+  color: $font-primary;
+}
+
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: #333333;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: $v-padding $h-padding $v-padding $h-padding;
+}
+
+.logo {
+  flex-basis: 50%;
+
+  a {
+    text-decoration: none;
+    transition: all 0.5s ease;
+  }
+
+  a:hover {
+    color: $font-secondary;
+  }
+  h1 {
+    font-size: 28px;
+    letter-spacing: 5px;
+    font-family: "Calistoga", cursive;
+    span {
+      font-weight: bolder;
+      margin-left: -3px;
+      margin-top: -2px;
+    }
+  }
+}
+
+nav {
+  flex-basis: 40%;
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    list-style-type: none;
+    margin-bottom: 0;
+
+    li {
+      a {
+        text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: 1px;
+        color: $font-secondary;
+        font-family: "PT Serif", serif;
+        transition: all 0.5s ease;
+      }
+
+      a:hover {
+        text-decoration: none;
+        color: lighten($font-primary, 10%);
+      }
+    }
+  }
+}
+
+.post-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 $h-padding 0 $h-padding;
+}
+
+.banner-wrapper {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.banner {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.slide-1 {
+  background-image: url(assets/img/banner1.jpg);
+  background-position: top;
+  background-size: cover;
+}
+.slide-2 {
+  background-image: url(assets/img/banner2.png);
+  background-position: top;
+  background-size: cover;
+}
+
+.slide-3 {
+  background-image: url(assets/img/banner3.png);
+  background-position: top;
+  background-size: cover;
+}
+
+.slick-dots {
+  list-style-type: none;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 60px;
+
+  button {
+    font-size: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: none;
+    transition: all 0.5s ease;
+    border: 1px solid white;
+    background: transparent;
+    box-shadow: -14px 15px 29px -6px rgba(0, 0, 0, 0.75);
+  }
+
+  .slick-active {
+    button {
+      background: white;
+    }
+  }
+
+  button:focus {
+    outline: none;
+  }
+}
+
+.slide-caption {
+  background: rgba(0, 0, 0, 0.5);
+  width: fit-content;
+  padding: $v-padding/2 $h-padding/2 $v-padding/2 $h-padding/2;
+  height: fit-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  h1,
+  p {
+    color: white;
+    visibility: hidden;
+  }
+}
+
+.caption-design {
+  padding: $v-padding/2 $h-padding/2 $v-padding/2 $h-padding/2;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  h1 {
+    font-family: "PT Serif", serif;
+    font-size: 48px;
+    letter-spacing: 4px;
+    line-height: 55px;
+  }
+  p {
+    font-family: "Inconsolata", monospace;
+    letter-spacing: 2px;
+    margin-top: 10px;
+    font-size: 20px;
+  }
+}
+
+.post-content-txt {
+  padding: $v-padding * 1.3 $h-padding 0 $h-padding;
+}
+
+.content-category {
+  a {
+    font-size: 16px;
+    text-transform: uppercase;
+    color: lighten($font-primary, 30%);
+    font-family: "PT Serif", serif;
+    transition: all 0.5s ease;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: lighten($font-primary, 10%);
+  }
+}
+
+.content-heading {
+  padding-top: $v-padding / 2;
+  padding-bottom: $v-padding / 2;
+
+  h1 {
+    font-family: "Calistoga", cursive;
+    letter-spacing: 5px;
+    margin-left: -2px;
+  }
+}
+
+.content-description {
+  padding-bottom: $v-padding;
+  p {
+    font-family: "PT Serif", serif;
+    font-size: 18px;
+    line-height: 32px;
+    letter-spacing: 1px;
+    color: lighten($font-primary, 30%);
+  }
+}
+
+.post-comment {
+  a {
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #8f4426;
+    font-family: "PT Serif", serif;
+    transition: all 0.5s ease;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: lighten(#8f4426, 10%);
+  }
+}
+
+.blog-post-list {
+  padding: $v-padding $h-padding * 2 0 $h-padding * 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.blog-post-wrapper {
+  width: 47%;
+  cursor: pointer;
+  padding-bottom: $v-padding;
+}
+
+.blog-post-img {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  img {
+    width: 100%;
+    margin-left: -2px;
+  }
+}
+
+.blog-post-category {
+  a {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: lighten($font-primary, 30%);
+    font-family: "PT Serif", serif;
+    transition: all 0.5s ease;
+    padding-top: $v-padding / 3;
+    padding-bottom: $v-padding / 3;
+    display: block;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: lighten($font-primary, 10%);
+  }
+}
+
+.blog-post-heading {
+  h2 {
+    font-family: "Calistoga", cursive;
+    letter-spacing: 3px;
+    font-size: 28px;
+    margin-left: -2px;
+  }
+}
+
+.blog-post-excerpt {
+  padding-top: $v-padding / 4;
+  p {
+    font-family: "PT Serif", serif;
+    font-size: 16px;
+    text-align: justify;
+    color: lighten($font-primary, 15%);
+  }
+}
+
+.blog-post-design {
+  position: absolute;
+  width: 80%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -400%);
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s ease;
+}
+
+.blog-post-design-inner {
+  position: absolute;
+  width: 80%;
+  height: 50%;
+  border: 2px solid white;
+  padding: $v-padding / 3 $h-padding/3 $v-padding / 3 $h-padding/3;
+  transform: translateY(1200%);
+  transition: all 1s ease;
+
+  a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 3000%);
+    color: white;
+    font-family: "PT Serif", serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    transition: all 1.2s ease;
+  }
+}
+
+.blog-post-active {
+  .blog-post-design {
+    transform: translate(-50%, -50%);
+  }
+
+  .blog-post-design-inner {
+    transform: translateY(0);
+    a {
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+footer {
+  padding-left: $h-padding * 2;
+  padding-right: $h-padding;
+  background: #f1f3f4;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+
+  ul {
+    margin-bottom: 0;
+  }
+
+  a,
+  p {
+    color: #5d5b6a;
+  }
+}
+
+.footer-menu {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  li {
+    margin-left: 30px;
+    a {
+      font-family: "PT Serif", serif;
+      text-decoration: none;
+      transition: all 0.5s ease;
+    }
+
+    a:hover {
+      color: #8f4426;
+    }
+  }
+
+  li:first-child {
+    margin-left: 0;
+  }
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  p {
+    font-family: "PT Serif", serif;
+    padding-right: 10px;
+  }
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    li {
+      a {
+        font-family: "Font Awesome 5 Brands";
+        text-decoration: none;
+        font-size: 16px;
+        color: #5d5b6a;
+        transition: all 0.5s ease;
+
+        i {
+          font-style: normal;
+          margin-left: 20px;
+        }
+      }
+
+      a:hover {
+        color: #8f4426;
+      }
+    }
+  }
+}
