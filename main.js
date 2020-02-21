@@ -92,4 +92,12 @@ $(function() {
   $(".banner-wrapper").on("beforeChange", (e, s, c, n) => {
     slideCaptionAnimationOut(s, c);
   });
+
+  $(".nav-toggler").click(e => {
+    $("header").toggleClass("nav-opened");
+  });
+
+  $(".nav-wrapper li a").click(() => {
+    $("header").removeClass("nav-opened");
+  });
 });

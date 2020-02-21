@@ -1,8 +1,14 @@
 $h-padding: 80px;
 $v-padding: 60px;
-
 $font-primary: #333333;
 $font-secondary: lighten($font-primary, 30%);
+$tablet-width: 960px;
+
+@mixin tablet {
+  @media (max-width: #{$tablet-width}) {
+    @content;
+  }
+}
 
 * {
   margin: 0;
@@ -11,9 +17,9 @@ $font-secondary: lighten($font-primary, 30%);
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
   background-color: white;
   color: $font-primary;
+  overflow-x: hidden;
 }
 
 a,
@@ -28,17 +34,30 @@ h6 {
   color: #333333;
 }
 
+i {
+  font-family: "Font Awesome 5 Brands";
+}
+
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
   padding: $v-padding $h-padding $v-padding $h-padding;
+  position: relative;
+
+  @include tablet {
+    padding: $v-padding/2 $h-padding/2 $v-padding/2 $h-padding/2;
+    width: 100%;
+  }
 }
 
 .logo {
-  flex-basis: 50%;
+  flex-basis: 40%;
 
+  @include tablet {
+    flex-basis: none;
+  }
   a {
     text-decoration: none;
     transition: all 0.5s ease;
@@ -61,6 +80,21 @@ header {
 
 nav {
   flex-basis: 40%;
+  transition: all 0.5s ease;
+  @include tablet {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    width: 100%;
+    top: -100%;
+    left: 0;
+    padding: $v-padding / 2 $h-padding $v-padding/3 $h-padding;
+    z-index: 999;
+    background-color: white;
+    transition: all 0.5s ease;
+    box-shadow: 0px 12px 57px -26px rgba(0, 0, 0, 0.75);
+  }
   ul {
     display: flex;
     justify-content: space-between;
@@ -69,7 +103,17 @@ nav {
     list-style-type: none;
     margin-bottom: 0;
 
+    @include tablet {
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
     li {
+      @include tablet {
+        margin-bottom: 10px;
+        margin-left: 5px;
+      }
       a {
         text-transform: uppercase;
         font-size: 14px;
@@ -77,11 +121,117 @@ nav {
         color: $font-secondary;
         font-family: "PT Serif", serif;
         transition: all 0.5s ease;
+        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          font-family: "Font Awesome 5 Free";
+          font-size: 16px;
+          margin-right: 6px;
+        }
       }
 
       a:hover {
         text-decoration: none;
         color: lighten($font-primary, 10%);
+      }
+    }
+
+    li:first-child {
+      @include tablet {
+        margin-left: 0px;
+      }
+    }
+  }
+}
+
+.nav-toggler {
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  width: 25px;
+  height: 25px;
+  display: none;
+  z-index: 999999;
+  position: absolute;
+  right: 0;
+  margin-right: $h-padding / 2;
+  @include tablet {
+    display: inherit;
+  }
+
+  span {
+    width: 25px;
+    height: 5px;
+    background-color: $font-primary;
+    transition: all 0.5s ease;
+    border-radius: 2px;
+    position: absolute;
+  }
+
+  span:nth-child(1) {
+    top: 0;
+  }
+
+  span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  span:nth-child(3) {
+    bottom: 0;
+  }
+}
+
+.nav-opened {
+  .nav-toggler {
+    transition: all 0.5s ease;
+    position: fixed;
+
+    span {
+      transition: all 0.5s ease;
+    }
+    @include tablet {
+      span:nth-child(1) {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+      }
+      span:nth-child(2) {
+        opacity: 0;
+      }
+
+      span:nth-child(3) {
+        transform: rotate(-45deg);
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
+      }
+    }
+  }
+}
+
+nav {
+  .logo {
+    display: none;
+  }
+}
+
+.nav-opened {
+  @include tablet {
+    position: relative;
+  }
+
+  nav {
+    @include tablet {
+      transform: translateY(0);
+      display: flex;
+      top: 0;
+      transition: all 0.5s ease;
+    }
+
+    .logo {
+      @include tablet {
+        display: inherit;
       }
     }
   }
@@ -94,6 +244,10 @@ nav {
   flex-direction: column;
   width: 100%;
   padding: 0 $h-padding 0 $h-padding;
+
+  @include tablet {
+    padding: 0 $h-padding/2 0 $h-padding/2;
+  }
 }
 
 .banner-wrapper {
@@ -110,6 +264,15 @@ nav {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+
+  @include tablet {
+    height: 200px;
+  }
+
+  @include tablet {
+    border-radius: 10px;
+    overflow: hidden;
+  }
 }
 
 .slide-1 {
@@ -179,6 +342,10 @@ nav {
     color: white;
     visibility: hidden;
   }
+
+  @include tablet {
+    padding: $v-padding/8 $h-padding/8 $v-padding/8 $h-padding/8;
+  }
 }
 
 .caption-design {
@@ -186,22 +353,42 @@ nav {
   width: 100%;
   height: 100%;
   border: 2px solid white;
+
+  @include tablet {
+    padding: $v-padding/8 $h-padding/8 $v-padding/8 $h-padding/8;
+  }
   h1 {
     font-family: "PT Serif", serif;
     font-size: 48px;
     letter-spacing: 4px;
     line-height: 55px;
+
+    @include tablet {
+      font-size: 18px;
+      line-height: 18px;
+    }
   }
   p {
     font-family: "Inconsolata", monospace;
     letter-spacing: 2px;
     margin-top: 10px;
     font-size: 20px;
+
+    @include tablet {
+      margin-top: 5px;
+      font-size: 12px;
+      line-height: 12px;
+    }
   }
 }
 
 .post-content-txt {
   padding: $v-padding * 1.3 $h-padding 0 $h-padding;
+
+  @include tablet {
+    padding: $v-padding / 4 0 0 0;
+    margin-left: 2px;
+  }
 }
 
 .content-category {
@@ -211,6 +398,10 @@ nav {
     color: lighten($font-primary, 30%);
     font-family: "PT Serif", serif;
     transition: all 0.5s ease;
+
+    @include tablet {
+      font-size: 14px;
+    }
   }
 
   a:hover {
@@ -223,21 +414,40 @@ nav {
   padding-top: $v-padding / 2;
   padding-bottom: $v-padding / 2;
 
+  @include tablet {
+    padding-top: $v-padding / 4;
+    padding-bottom: $v-padding / 4;
+  }
+
   h1 {
     font-family: "Calistoga", cursive;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
     margin-left: -2px;
+    @include tablet {
+      font-size: 24px;
+    }
   }
 }
 
 .content-description {
   padding-bottom: $v-padding;
+
+  @include tablet {
+    padding-bottom: $v-padding / 2;
+  }
+
   p {
-    font-family: "PT Serif", serif;
+    font-family: "Nanum Myeongjo";
     font-size: 18px;
     line-height: 32px;
     letter-spacing: 1px;
     color: lighten($font-primary, 30%);
+
+    @include tablet {
+      text-align: justify;
+      font-size: 16px;
+      line-height: 30px;
+    }
   }
 }
 
@@ -248,6 +458,9 @@ nav {
     color: #8f4426;
     font-family: "PT Serif", serif;
     transition: all 0.5s ease;
+    @include tablet {
+      font-size: 14px;
+    }
   }
 
   a:hover {
@@ -263,21 +476,54 @@ nav {
   align-items: center;
   flex-wrap: wrap;
   flex-direction: row;
+
+  @include tablet {
+    padding: $v-padding / 1.5 $h-padding / 2 0 $h-padding / 2;
+    flex-direction: column;
+  }
 }
 
 .blog-post-wrapper {
   width: 47%;
   cursor: pointer;
   padding-bottom: $v-padding;
+
+  @include tablet {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    padding-bottom: 30px;
+  }
 }
 
 .blog-post-img {
-  width: 100%;
   position: relative;
   overflow: hidden;
+
+  @include tablet {
+    position: relative;
+    overflow: hidden;
+    flex-basis: 40%;
+  }
+
   img {
     width: 100%;
-    margin-left: -2px;
+
+    @include tablet {
+      width: 250px;
+      height: 180px;
+    }
+  }
+}
+
+.blog-post-txt-content-wrapper {
+  @include tablet {
+    flex-basis: 60%;
+    max-height: 180px;
+    overflow: hidden;
+    padding-left: 20px;
   }
 }
 
@@ -291,6 +537,12 @@ nav {
     padding-top: $v-padding / 3;
     padding-bottom: $v-padding / 3;
     display: block;
+
+    @include tablet {
+      font-size: 12px;
+      padding-top: $v-padding / 10;
+      padding-bottom: $v-padding / 10;
+    }
   }
 
   a:hover {
@@ -302,19 +554,34 @@ nav {
 .blog-post-heading {
   h2 {
     font-family: "Calistoga", cursive;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     font-size: 28px;
-    margin-left: -2px;
+
+    @include tablet {
+      font-size: 18px;
+      text-align: justify;
+    }
   }
 }
 
 .blog-post-excerpt {
   padding-top: $v-padding / 4;
+  @include tablet {
+    padding-top: $v-padding / 8;
+  }
   p {
-    font-family: "PT Serif", serif;
+    font-family: "Nanum Myeongjo";
+    color: lighten($font-primary, 30%);
+
     font-size: 16px;
+    letter-spacing: 1px;
     text-align: justify;
     color: lighten($font-primary, 15%);
+
+    @include tablet {
+      font-size: 14px;
+      text-align: justify;
+    }
   }
 }
 
@@ -330,6 +597,10 @@ nav {
   justify-content: center;
   align-items: center;
   transition: all 1s ease;
+
+  @include tablet {
+    display: none;
+  }
 }
 
 .blog-post-design-inner {
@@ -379,6 +650,11 @@ footer {
   align-items: center;
   flex-direction: row;
 
+  @include tablet {
+    padding-left: $h-padding / 2;
+    padding-right: $h-padding / 2;
+  }
+
   ul {
     margin-bottom: 0;
   }
@@ -396,12 +672,26 @@ footer {
   align-items: center;
   flex-direction: row;
 
+  @include tablet {
+    margin-left: 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   li {
     margin-left: 30px;
+
+    @include tablet {
+      margin-left: 0;
+    }
     a {
       font-family: "PT Serif", serif;
       text-decoration: none;
       transition: all 0.5s ease;
+
+      @include tablet {
+        font-size: 12px;
+      }
     }
 
     a:hover {
@@ -420,9 +710,17 @@ footer {
   align-items: center;
   flex-direction: row;
 
+  @include tablet {
+    flex-direction: column;
+    justify-content: center;
+  }
+
   p {
     font-family: "PT Serif", serif;
     padding-right: 10px;
+    @include tablet {
+      padding-right: 0;
+    }
   }
 
   ul {
@@ -443,11 +741,24 @@ footer {
         i {
           font-style: normal;
           margin-left: 20px;
+          @include tablet {
+            margin-left: 15px;
+          }
         }
       }
 
       a:hover {
         color: #8f4426;
+      }
+    }
+  }
+
+  li:first-child {
+    a {
+      i:first-child {
+        @include tablet {
+          margin-left: 0px;
+        }
       }
     }
   }
