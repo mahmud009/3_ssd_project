@@ -1,2 +1,2 @@
-# 3_ssd_project
+# Tinimo photography html
 Simple and clean blog design
